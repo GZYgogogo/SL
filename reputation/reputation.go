@@ -73,8 +73,8 @@ func (rm *ReputationManager) computeLocalOpinion(alpha, beta float64, commQualit
 	if total > 0 {
 		// 使用tanh函数让信誉值逐步增长，而不是一次性达到极值
 		// scaleFactor会随着交互次数增加而逐渐增大（从0到1）
-		// 除数越大，增长越平缓（正面信誉增长慢）
-		scaleFactorPositive := math.Tanh(alpha / 30.0) // 诚实节点增长较快（除数从100降到30）
+		// 除数越小，增长越快（正面信誉增长快）
+		scaleFactorPositive := math.Tanh(alpha / 15.0) // 诚实节点增长很快（除数从30降到15，速度翻倍）
 		scaleFactorNegative := math.Tanh(beta / 50.0)  // 恶意节点下降较快
 
 		// b = (1 - u) × α/(α+β) × scaleFactor
